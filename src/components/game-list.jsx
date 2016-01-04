@@ -22,8 +22,9 @@ module.exports = React.createClass({
     }
   },
   render: function() {
-    var list = this.props.gamecatData.map(function(gamecatProps){
-      return <Gamecat {...gamecatProps} />
+    {console.log()}
+    var list = this.state.gamecatData.map(function(gamecatProps){
+      return <GameCat {...gamecatProps} />
     });
 
     return <div>
