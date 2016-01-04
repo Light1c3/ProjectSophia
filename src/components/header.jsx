@@ -4,12 +4,11 @@ var Link = Router.Link;
 
 module.exports = React.createClass({
   render: function() {
-    return <div>
-        <Link to="/" className="navbar-brand">
-          <h2 className="text-center">
-            Welcome to Project Sophia
-          </h2>
-        </Link>
+    return <div className="row panel panel-defualt">
+      <div className="col-md-8 col-md-offset-2">
+        <h2 className="text-center">
+          Welcome to Project Sophia
+        </h2>
         <div className="input-group searchBar">
           <input type="text" className="form-control" />
           <span className="input-group-btn">
@@ -19,5 +18,6 @@ module.exports = React.createClass({
           </span>
         </div>
     </div>
+  </div>
   }
 })

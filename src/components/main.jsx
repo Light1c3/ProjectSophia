@@ -5,11 +5,9 @@ var Options = require('./game-options');
 
 module.exports = React.createClass({
   render: function () {
-    return <div className="row panel panel-defualt">
-      <div className="col-md-8 col-md-offset-2">
-        <Header />
-        {this.content()}
-      </div>
+    return <div>
+      <Header />
+      {this.content()}
     </div>
   },
   content: function() {
