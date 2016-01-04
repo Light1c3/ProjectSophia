@@ -7,7 +7,7 @@ module.exports = React.createClass({
     return <div className="row panel panel-defualt">
       <div className="col-md-8 col-md-offset-2">
         <h2 className="text-center">
-          Welcome to Project Sophia
+          <Link to="/">Welcome to Project Sophia</Link>
         </h2>
         <div className="input-group searchBar">
           <input type="text" className="form-control" />
