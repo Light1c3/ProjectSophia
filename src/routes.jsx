@@ -4,12 +4,12 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 
 var Main = require('./components/main');
-var Topic = require(./);
+var GameMark = require('./components/usermark');
 
 module.exports = (
   <Router>
     <Route path="/" component={Main}>
-      <Route path="games/:id" component={Topic} />
+      <Route path="game/:id" component={GameMark} />
     </Route>
   </Router>
 )

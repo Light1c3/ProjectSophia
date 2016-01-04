@@ -10,7 +10,7 @@ module.exports = React.createClass({
           <h3>{this.props.title}</h3>
           <p>{this.props.description}</p>
           <p>
-            <Badge title={this.props.title} number={this.props.number} header={this.props.header}/>
+            <Badge id={this.props.id} number={this.props.number} header={this.props.header}/>
           </p>
         </div>
       </div>
