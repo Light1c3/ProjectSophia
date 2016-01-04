@@ -9,7 +9,7 @@ var Topic = require(./);
 module.exports = (
   <Router>
     <Route path="/" component={Main}>
-      <Route path="games/2" component={Topic} />
+      <Route path="games/:id" component={Topic} />
     </Route>
   </Router>
 )
