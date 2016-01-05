@@ -9,11 +9,13 @@ module.exports = React.createClass({
   },
   renderList: function() {
     if(!this.props.items) {
-      return <h4>
-        <div className="text-center">
-          No Benchmarks are currently posted for this game.
-        </div>
-      </h4>
+      return <div>
+        <h4>
+          <div className="text-center">
+            No Benchmarks are currently posted for this game.
+          </div>
+        </h4>
+      </div>
     } else {
       var children = [];
 
