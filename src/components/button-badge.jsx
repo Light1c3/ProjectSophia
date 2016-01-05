@@ -4,13 +4,15 @@ var Link = Router.Link;
 
 module.exports = React.createClass({
   render: function() {
-    return <button className="btn btn-Default" type="button">
-      <Link to={"games/" + this.props.id} className="btnBadge">
-        {this.props.header}
-      </Link>
-      <span className="badge">
-        {this.props.number}
-      </span>
-    </button>
+    return <Link to={"games/" + this.props.id} className="btnBadge">
+      <button className="btn btn-Default" type="btnBadge">
+        <span className="badgeHeader">
+          {this.props.header}
+        </span>
+        <span className="badge">
+          {this.props.number}
+        </span>
+      </button>
+    </Link>
   }
 });
