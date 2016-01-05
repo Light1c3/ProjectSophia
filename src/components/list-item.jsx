@@ -36,7 +36,7 @@ module.exports = React.createClass({
           <br />
           Max:    {this.state.maxFPS}
           <br />
-          Min     {this.state.minFPS}
+          Min:    {this.state.minFPS}
         </h3>
       </div>
     </div>

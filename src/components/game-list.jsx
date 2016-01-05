@@ -54,13 +54,11 @@ module.exports = React.createClass({
     }
   },
   render: function() {
-    {console.log()}
     var list = this.state.gamecatData.map(function(gamecatProps){
       return <div className="text-center">
         <GameCat {...gamecatProps} />
       </div>
     });
-
     return <div>
       {list}
     </div>

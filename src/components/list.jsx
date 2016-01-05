@@ -10,7 +10,9 @@ module.exports = React.createClass({
   renderList: function() {
     if(!this.props.items) {
       return <h4>
-        Add a todo to get started.
+        <div className="text-center">
+          No Benchmarks are currently posted for this game.
+        </div>
       </h4>
     } else {
       var children = [];

@@ -9,7 +9,7 @@ var GameMark = require('./components/usermark');
 module.exports = (
   <Router>
     <Route path="/" component={Main}>
-      <Route path="game/:id" component={GameMark} />
+      <Route path="games/:id" component={GameMark} />
     </Route>
   </Router>
 )
