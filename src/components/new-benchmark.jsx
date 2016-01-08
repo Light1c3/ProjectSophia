@@ -14,7 +14,7 @@ var Button = Bootstrap.Button;
 module.exports = React.createClass({
   getInitialState() {
     return {
-      showModal: false
+      showModal: false,
     }
   },
   render: function() {
@@ -37,7 +37,7 @@ module.exports = React.createClass({
                 <Well bsSize="small" className="text-center">
                   Enter Basic Computer Specs
                 </Well>
-                <Input type="text" label="CPU" bsSize="large" placeholder="Enter Current CPU" />
+                <Input type="text" label="CPU" bsSize="large" value={this.state.value} ref="inpCPU" placeholder="Enter Current CPU" />
               </Col>
             </Row>
             <Row className="show-grid">
@@ -73,10 +73,14 @@ module.exports = React.createClass({
         </Grid>
       </Modal.Body>
       <Modal.Footer>
-        <Button bsStyle="primary" onClick={this.props.submit}>Submit</Button>
+        <Button type="submit" bsStyle="primary" onClick={this.formSubmit}>Submit</Button>
         <Button bsStyle="danger" onClick={this.props.onHide}>Close</Button>
       </Modal.Footer>
-    </Modal>
-    );
+    </Modal>);
+  },
+  formSubmit() {
+    console.log("Inner Flag 1")
+    {this.props.handleSubmit}
+    console.log("Inner Flag 2")
   }
 });

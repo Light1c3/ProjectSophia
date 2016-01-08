@@ -19,7 +19,7 @@ module.exports = React.createClass({
       items: {},
       loaded: false,
       showModal: false,
-      CPU: '',
+      CPU: 'i7 3770K',
       GPU: '',
       RAM: '',
       avgFPS: '',
@@ -48,22 +48,15 @@ module.exports = React.createClass({
         >
           Create New Benchmark
         </Button>
-        <NewBench submit={this.handleClick} show={this.state.showModal} onHide={this.close} />
+        <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} CPU={this.state.CPU}/>
       </div>
     </div>
   },
   handleDataLoaded: function(){
     this.setState({loaded: true});
   },
-  handleClick: function() {
-    this.firebaseRefs.items.push({
-      CPU: 'Test',
-      GPU: 'test',
-      RAM: 'test',
-      avgFPS: 'test',
-      minFPS: 'test',
-      maxFPS: 'test'
-    });
+  handleSubmit: function() {
+    console.log("Outter Flag");
     this.setState({showModal: false});
   },
 });
