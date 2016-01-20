@@ -1,4 +1,5 @@
 var React = require('react');
+var Api = require('../utils/api');
 var Firebase = require('firebase');
 var rootUrl = 'https://blistering-torch-4253.firebaseio.com/';
 

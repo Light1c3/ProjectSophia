@@ -35,7 +35,7 @@ module.exports = {
     title: 'Crysis 3',
     id: 'crysis3',
     description: 'Fallout 4 is an open world action role-playing video game developed by Bethesda Game Studios and published by Bethesda Softworks. The fifth major installment in the Fallout series...',
-    imageUrl: 'http://www.adventure-music-pack.com/wp-content/uploads/Crysis-3.jpg'
+    imageUrl: 'https://pbs.twimg.com/profile_images/3249713699/b0ee71fd34177a3a2e9cdc50594aed4c_400x400.jpeg'
   },{
     header: 'Benchmarks',
     number: 159,
