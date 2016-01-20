@@ -6,6 +6,7 @@ var GameList = require('./gamecat');
 var Router = require('react-router');
 var Bootstrap = require('react-bootstrap');
 var NewBench = require('./new-benchmark');
+var Api = require('../utils/api');
 var Link = Router.Link;
 var rootUrl = 'https://luminous-heat-9993.firebaseio.com//';
 
@@ -16,6 +17,7 @@ module.exports = React.createClass({
   mixins: [ ReactFire ],
   getInitialState: function() {
     return {
+      benchmarks: [],
       items: {},
       loaded: false,
       showModal: false,
@@ -34,6 +36,7 @@ module.exports = React.createClass({
     this.setState({ showModal: true });
   },
   componentWillMount: function() {
+    Api.get('games');
     this.fb = new Firebase(rootUrl + 'games/' + this.props.params.id );
     this.bindAsObject(this.fb, 'items');
     this.fb.on('value', this.handleDataLoaded);
@@ -41,6 +44,10 @@ module.exports = React.createClass({
   render: function() {
     return <div className={"content " + (this.state.loaded ? 'loaded' : '')}>
       <List items={this.state.items} />
+      <div className="list-group">
+        Games from DB
+        {this.renderBenchmarks()}
+      </div>
       <div className="text-center">
         <Button
           bsSize="large"
@@ -59,4 +66,11 @@ module.exports = React.createClass({
     console.log("Outter Flag");
     this.setState({showModal: false});
   },
+  renderBenchmarks: function() {
+    this.state.benchmarks.maps(function(game){
+      return <li>
+        {game.Title}
+      </li>
+    })
+  }
 });
