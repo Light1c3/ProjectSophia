@@ -1,5 +1,5 @@
 var React = require('react');
-var Usermark = require('./usermark');
+var BenchmarkList = require('./benchmark-list');
 var Bootstrap = require('react-bootstrap');
 
 var Jumbotron = Bootstrap.Jumbotron;
