@@ -2,7 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../actions');
 var Header = require('./header');
-var Game = require('./game');
+var GameObject = require('./game');
 var Router = require('react-router');
 var GamesStore = require('../stores/games-store');
 var Options = require('../data/game-options');
@@ -27,10 +27,19 @@ module.exports = React.createClass({
     </div>
   },
   renderGames: function() {
-    return this.state.games.map(function(game) {
-      <p>{game.Publisher}</p>
-      console.log(game.Publisher);
-    });
+    return <div>
+      {this.state.games.map((game) =>
+        <GameObject
+          key={game.Id}
+          Publisher={game.Publisher}
+          ImageUrl={game.ImageUrl}
+          Title={game.Title}
+          Id={game.Id}
+          Description={game.Description}
+          MarkCount ={game.MarkCount}
+        />
+      )}
+    </div>
  },
   onChange: function(event, games) {
     this.setState({games: games});

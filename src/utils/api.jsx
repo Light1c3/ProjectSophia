@@ -7,5 +7,20 @@ module.exports = window.api = {
     .then(function(response){
       return response.json()
     });
+  },
+  post: function(url, BBody) {
+    return fetch(rootUrl + url, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Method': 'Post'
+      },
+      body: JSON.stringify({
+        Username: "PostTest",
+        CPU: "Intel Skylake",
+        GameId: 4,
+      })
+    })
   }
 };

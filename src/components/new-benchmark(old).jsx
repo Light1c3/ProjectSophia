@@ -1,6 +1,4 @@
 var React = require('react');
-var Actions = require('../actions');
-var BenchmarkStore = require('../stores/benches-store');
 var BenchmarkList = require('./benchmark-list');
 var Bootstrap = require('react-bootstrap');
 
@@ -42,6 +40,35 @@ module.exports = React.createClass({
                 <Input type="text" label="CPU" bsSize="large" value={this.state.value} ref="inpCPU" placeholder="Enter Current CPU" />
               </Col>
             </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input type="text" label="GPU" bsSize="large" placeholder="Enter Current GPU" />
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input type="text" label="RAM" bsSize="large" placeholder="Enter Current RAM" />
+              </Col>
+            </Row>
+            <hr />
+            <Row className="show-grid">
+              <Col>
+                <Well bsSize="small" className="text-center">
+                  Enter Benchmark Results
+                </Well>
+                <Input type="text" label="Avarage FPS" bsSize="large" placeholder="Enter Avarage FPS" />
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input type="text" label="Maximum FPS" bsSize="large" placeholder="Enter Maximum FPS" />
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input type="text" label="Minimum FPS" bsSize="large" placeholder="Enter Minimum FPS" />
+              </Col>
+            </Row>
           </form>
         </Grid>
       </Modal.Body>
@@ -52,10 +79,8 @@ module.exports = React.createClass({
     </Modal>);
   },
   formSubmit() {
-    var text = '{ "Username":"PostTest" , "CPU":"Skylake" , "GameId": 2 }';
-    var obj = JSON.parse(text);
-    Actions.postBenchmarks(obj);
-    console.log(obj);
-
+    console.log("Inner Flag 1")
+    {this.props.handleSubmit}
+    console.log("Inner Flag 2")
   }
 });

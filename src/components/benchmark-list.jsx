@@ -26,13 +26,13 @@ module.exports = React.createClass({
     }
   },
   componentWillMount: function() {
-    Actions.getBenches();
+    Actions.getBenchmarks(this.props.params.id);
   },
   render: function() {
     return <div>
       {this.renderBenches()}
       <div className="text-center">
-        <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} CPU={this.state.CPU}/>
+        <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} id={this.props.params.id}/>
       </div>
       <Button
         bsSize="large"
@@ -40,12 +40,15 @@ module.exports = React.createClass({
       >
         Create New Benchmark
       </Button>
+
     </div>
   },
   renderBenches: function() {
-    return this.state.benches.map(function(benchmark) {
-      return <Benchmark Benches={benchmark} className="list-group-item" key={benchmark.Id}/>
-    });
+    return <div>
+      {this.state.benches.map((benchmark) =>
+        <Benchmark Benches={benchmark} className="list-group-item" key={benchmark.Id} />
+      )}
+    </div>
   },
   onChange: function(event, benches) {
     this.setState({benches: benches});

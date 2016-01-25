@@ -5,7 +5,7 @@ var Actions = require('../actions');
 module.exports = Reflux.createStore({
   listenables: [Actions],
   getGames: function() {
-    return api.get('games')
+    return api.get('games/all')
       .then(function(json){
         this.games = json;
         this.triggerChange();

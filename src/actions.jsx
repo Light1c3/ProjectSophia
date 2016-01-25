@@ -1,6 +1,7 @@
 var Reflux = require('reflux');
 
 module.exports = Reflux.createActions([
-  'getBenches',
-  'getGames'
+  'getBenchmarks',
+  'getGames',
+  'postBenchmarks'
 ]);
