@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 var React = require('react');
 var Actions = require('../actions');
 var BenchmarkStore = require('../stores/benches-store');
@@ -16,7 +18,11 @@ var Button = Bootstrap.Button;
 module.exports = React.createClass({
   getInitialState() {
     return {
-      showModal: false,
+      Username: '',
+      CPU: '',
+      GPU: '',
+      RAM: '',
+      showModal: false
     }
   },
   render: function() {
@@ -39,7 +45,17 @@ module.exports = React.createClass({
                 <Well bsSize="small" className="text-center">
                   Enter Basic Computer Specs
                 </Well>
-                <Input type="text" label="CPU" bsSize="large" value={this.state.value} ref="inpCPU" placeholder="Enter Current CPU" />
+                <Input type="text" label="CPU" onChange={this.handleChange.bind(this, 'CPU')} value={this.state.CPU} bsSize="large" ref="inpCPU" placeholder="Enter Current CPU" />
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input type="text" label="GPU" onChange={this.handleChange.bind(this, 'GPU')} value={this.state.GPU} bsSize="large" placeholder="Enter Current GPU" />
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input type="text" label="RAM" onChange={this.handleChange.bind(this, 'RAM')} value={this.state.RAM} bsSize="large" placeholder="Enter Current RAM" />
               </Col>
             </Row>
           </form>
@@ -51,11 +67,15 @@ module.exports = React.createClass({
       </Modal.Footer>
     </Modal>);
   },
-  formSubmit() {
-    var text = '{ "Username":"PostTest" , "CPU":"Skylake" , "GameId": 2 }';
-    var obj = JSON.parse(text);
-    Actions.postBenchmarks(obj);
-    console.log(obj);
+  formSubmit: function() {
+    var submitJSON = {};
+    submitJSON = '{ "Username":"PostTest" , "CPU":"Skylake" , "GameId": 2 }';
 
+    console.log(submitJSON);
+  },
+  handleChange: function(name, e) {
+      var state = {};
+      state[name] = e.target.value;
+      this.setState(state);
   }
 });

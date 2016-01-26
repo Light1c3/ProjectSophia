@@ -1,26 +1,24 @@
-var Fetch = require('whatwg-fetch');
+var Request = require('superagent');
+var Promise = require('es6-promise').Promise;
+
 var rootUrl = 'http://localhost:51982/api/';
 
 module.exports = window.api = {
   get: function(url) {
-    return fetch(rootUrl + url, {})
-    .then(function(response){
-      return response.json()
+    return new Promise(function(resolve, reject) {
+      Request(rootUrl + url, function(err, res){
+        resolve(JSON.parse(res.text))
+      });
     });
   },
   post: function(url, BBody) {
-    return fetch(rootUrl + url, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Method': 'Post'
-      },
-      body: JSON.stringify({
-        Username: "PostTest",
-        CPU: "Intel Skylake",
-        GameId: 4,
-      })
-    })
+    console.log(BBody);
+    return new Promise(function(resolve, reject) {
+      Request.post(rootUrl + url)
+        .send(BBody)
+        .end(function (err, res) {
+          resolve(res)
+        });
+    });
   }
 };
