@@ -8,6 +8,7 @@ var Bootstrap = require('react-bootstrap');
 
 var Jumbotron = Bootstrap.Jumbotron;
 var Modal = Bootstrap.Modal;
+var Tooltip = Bootstrap.Tooltip;
 var Input = Bootstrap.Input;
 var Grid = Bootstrap.Grid;
 var Row = Bootstrap.Row;
@@ -22,6 +23,7 @@ module.exports = React.createClass({
       CPU: '',
       GPU: '',
       RAM: '',
+      SubmitBtnStyle: '',
       UsernameStyle: '',
       CPUStyle: '',
       GPUStyle: '',
@@ -60,26 +62,28 @@ module.exports = React.createClass({
             </Row>
             <Row className="show-grid">
               <Col>
-                <Input type="text" label="GPU" bsStyle={this.state.GPUStyle} onChange={this.handleChange.bind(this, 'GPU')} value={this.state.GPU} bsSize="large" ref="inptGPU" placeholder="Enter Current GPU" />
+                <Input hasFeedback type="text" label="GPU" bsStyle={this.state.GPUStyle} onChange={this.handleChange.bind(this, 'GPU')} value={this.state.GPU} bsSize="large" ref="inptGPU" placeholder="Enter Current GPU" />
               </Col>
             </Row>
             <Row className="show-grid">
               <Col>
-                <Input type="text" label="RAM" bsStyle={this.state.RAMStyle} onChange={this.handleChange.bind(this, 'RAM')} value={this.state.RAM} bsSize="large" ref="inptRAM" placeholder="Enter Current RAM" />
+                <Input hasFeedback type="text" label="RAM" bsStyle={this.state.RAMStyle} onChange={this.handleChange.bind(this, 'RAM')} value={this.state.RAM} bsSize="large" ref="inptRAM" placeholder="Enter Current RAM" />
               </Col>
             </Row>
           </form>
         </Grid>
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit"  onClick={this.formSubmit} >Submit</Button>
+        <Button bsStyle={this.state.SubmitBtnStyle} type="submit"  onClick={this.formSubmit} >Submit</Button>
         <Button bsStyle="danger" onClick={this.props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>);
   },
   formSubmit: function() {
-    console.log("formSubmit");
-    if (this.state.UsernameStyle == 'success' && this.state.CPUStyle == 'success') {
+    if (this.state.UsernameStyle == 'success' &&
+        this.state.CPUStyle == 'success' &&
+        this.state.GPUStyle == 'success' &&
+        this.state.RAMStyle == 'success') {
 
       var submitJSON = {
         "Username": this.state.Username,
@@ -91,14 +95,13 @@ module.exports = React.createClass({
       console.log(submitJSON);
       //Actions.postBenchmarks(submitJSON);
     } else {
-      console.log("else");
-      if (this.state.UsernameStyle !== 'seccess') {
+      if (this.state.UsernameStyle !== 'success') {
         console.log("No Username");
-      } else if (this.state.CPUStyle !== 'seccess') {
+      } else if (this.state.CPUStyle !== 'success') {
         console.log("No CPU");
-      } else if (this.state.GPUStyle !== 'seccess') {
+      } else if (this.state.GPUStyle !== 'success') {
         console.log("No GPU");
-      } else if (this.state.RAMStyle !== 'seccess') {
+      } else if (this.state.RAMStyle !== 'success') {
         console.log("No RAM");
       }
     }
@@ -112,24 +115,36 @@ module.exports = React.createClass({
   },
   validationState: function(style, event) {
     var length = event.target.value.length;
-
     switch (style) {
       case 'UsernameStyle':
         if (length > 6) this.setState({UsernameStyle: 'success'});
         else if (length > 4) this.setState({UsernameStyle: 'warning'});
+        else this.setState({UsernameStyle: 'default'});
         break;
       case 'CPUStyle':
         if (length > 6) this.setState({CPUStyle: 'success'});
         else if (length > 4) this.setState({CPUStyle: 'warning'});
+        else this.setState({CPUStyle: 'default'});
         break;
       case 'GPUStyle':
         if (length > 6) this.setState({GPUStyle: 'success'});
         else if (length > 4) this.setState({GPUStyle: 'warning'});
+        else this.setState({GPUStyle: 'default'});
         break;
       case 'RAMStyle':
         if (length > 6) this.setState({RAMStyle: 'success'});
         else if (length > 4) this.setState({RAMStyle: 'warning'});
+        else this.setState({RAMStyle: 'default'});
         break;
+    }
+    if (this.state.UsernameStyle == 'success' &&
+        this.state.CPUStyle == 'success' &&
+        this.state.GPUStyle == 'success' &&
+        this.state.RAMStyle == 'success') {
+
+      this.setState({SubmitBtnStyle: 'success'});
+    }else {
+      this.setState({SubmitBtnStyle: 'defualt'});
     }
     return {style};
   }
