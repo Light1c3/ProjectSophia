@@ -8,9 +8,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babelify": "^6.4.0",
     "browserify": "^9.0.3",
     "es6-promise": "^3.0.2",
     "firebase": "^2.2.6",
+    "formsy-react": "^0.17.0",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-react": "^3.0.1",
