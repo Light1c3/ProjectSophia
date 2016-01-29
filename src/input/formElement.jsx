@@ -1,5 +1,8 @@
 var React = require('react');
 var Formsy  = require('formsy-react');
+var FRC = require('formsy-react-components');
+
+var Input = FRC.Input;
 
 module.exports = React.createClass({
   mixins: [Formsy.Mixin],
@@ -17,13 +20,14 @@ module.exports = React.createClass({
     return (
       <div className={className}>
         <label htmlFor={this.props.name}>{this.props.title}</label>
-        <input
-          type={this.props.type || 'text'}
-          name={this.props.name}
-          onChange={this.changeValue}
-          value={this.getValue()}
-          checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
-        />
+          <Input
+            name = {this.props.name}
+            value= {this.getValue()}
+            label= {this.props.label}
+            type="text"
+            placeholder= {this.props.placeholder}
+            required
+          />
         <span className='validation-error'>{errorMessage}</span>
       </div>
     );

@@ -12,7 +12,6 @@ module.exports = window.api = {
     });
   },
   post: function(url, BBody) {
-    console.log(BBody);
     return new Promise(function(resolve, reject) {
       Request.post(rootUrl + url)
         .send(BBody)

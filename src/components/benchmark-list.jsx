@@ -14,6 +14,8 @@ module.exports = React.createClass({
     Reflux.listenTo(BenchmarkStore, 'onChange')
   ],
   close() {
+    console.log(this.state.submitCheck);
+    this.setState({submitCheck: true});
     this.setState({showModal: false});
   },
   open() {
@@ -22,6 +24,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       showModal: false,
+      submitCheck: false,
       benches: []
     }
   },
@@ -32,7 +35,7 @@ module.exports = React.createClass({
     return <div>
       {this.renderBenches()}
       <div className="text-center">
-        <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} id={this.props.params.id}/>
+        <NewBench show={this.state.showModal} subChcek={this.state.submitCheck} onHide={this.close} id={this.props.params.id}/>
       </div>
       <Button
         bsSize="large"

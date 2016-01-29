@@ -5,7 +5,6 @@ var Header = require('./header');
 var GameObject = require('./game');
 var Router = require('react-router');
 var GamesStore = require('../stores/games-store');
-var Options = require('../data/game-options');
 var Link = Router.Link;
 
 
