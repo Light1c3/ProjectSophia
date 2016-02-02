@@ -13,7 +13,8 @@ module.exports = React.createClass({
     }
   },
   search() {
-    console.log("Searched");
+    console.log(this.state.searchedItem);
+    this.setState({searchedItem: ''});
   },
   render: function() {
     return <div className="row panel panel-defualt">
@@ -22,7 +23,7 @@ module.exports = React.createClass({
           <Link to="/">Welcome to Project Sophia</Link>
         </h2>
         <div className="input-group searchBar">
-          <Input type="text" className="form-control" onChange={this.handleChange()} value={this.state.Username} />
+          <Input type="text" value={this.state.searchedItem} className="standalone" onChange={this.handleChange} ref="searchInput" />
           <span className="input-group-btn">
             <Button onClick={this.search}>
               Search
@@ -32,11 +33,9 @@ module.exports = React.createClass({
     </div>
   </div>
   },
-  handleChange: function() {
-    var state = {};
-    state[name] = e.target.value;
-    this.setState(state);
-    var namestyle  = name + 'Style';
-    this.setState(this.validationState(namestyle, e));
+  handleChange: function(evt) {
+    this.setState({
+      searchedItem: evt.target.value
+    });
   },
 })
