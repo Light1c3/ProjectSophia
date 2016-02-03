@@ -3,7 +3,8 @@ var Reflux = require('reflux');
 var Benchmark = require('./benchmark');
 var NewBench = require('./new-benchmark');
 var Bootstrap = require('react-bootstrap');
-var BenchmarkStore = require('../stores/benches-store');
+var BenchmarksStore = require('../stores/benches-store');
+var GamesStore = require('../stores/games-store');
 var Actions = require('../actions');
 
 var Modal = Bootstrap.Modal;
@@ -11,7 +12,8 @@ var Button = Bootstrap.Button;
 
 module.exports = React.createClass({
   mixins: [
-    Reflux.listenTo(BenchmarkStore, 'onChange')
+    Reflux.listenTo(BenchmarksStore, 'onChangeBench'),
+    Reflux.listenTo(GamesStore, 'onChangeGame')
   ],
   close() {
     this.setState({showModal: false});
@@ -22,14 +24,17 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       showModal: false,
-      benches: []
+      benches: [],
+      game: []
     }
   },
   componentWillMount: function() {
     Actions.getBenchmarks(this.props.params.id);
+    Actions.getGameById(this.props.params.id);
   },
   render: function() {
     return <div>
+      {console.log(this.state.game)}
       {this.renderBenches()}
       <div className="text-center">
         <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} id={this.props.params.id}/>
@@ -50,7 +55,10 @@ module.exports = React.createClass({
       )}
     </div>
   },
-  onChange: function(event, benches) {
+  onChangeBench: function(event, benches) {
     this.setState({benches: benches});
+  },
+  onChangeGame: function(event, game) {
+    this.setState({game: game});
   }
 })

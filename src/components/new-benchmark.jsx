@@ -23,11 +23,17 @@ module.exports = React.createClass({
       CPU: '',
       GPU: '',
       RAM: '',
-      SubmitBtnStyle: '',
-      UsernameStyle: '',
-      CPUStyle: '',
-      GPUStyle: '',
-      RAMStyle: '',
+      AvgFPS: '',
+      MinFPS: '',
+      MaxFPS: '',
+      SubmitBtnStyle: 'default',
+      UsernameStyle: 'default',
+      CPUStyle: 'default',
+      GPUStyle: 'default',
+      RAMStyle: 'default',
+      AvgFPSStyle: 'default',
+      MinFPSStyle: 'default',
+      MaxFPSStyle: 'default',
       showModal: false,
       disabled: true,
     }
@@ -49,7 +55,7 @@ module.exports = React.createClass({
           <form>
             <Row className="show-grid">
               <Col>
-                <Input hasFeedback type="text" label="Username" bsStyle={this.state.UsernameStyle} onChange={this.handleChange.bind(this, 'Username')} value={this.state.Username} bsSize="large" ref="inptUser" placeholder="Enter Username"/>
+                <Input hasFeedback type="text" label="Username" bsStyle={this.state.UsernameStyle} onChange={this.handleChange.bind(this, 'Username')} value={this.state.Username} bsSize="large"  placeholder="Enter Username"/>
               </Col>
             </Row>
             <Row className="show-grid">
@@ -57,19 +63,38 @@ module.exports = React.createClass({
                 <Well bsSize="small" className="text-center">
                   Enter Basic Computer Specs
                 </Well>
-                <Input hasFeedback type="text" label="CPU" bsStyle={this.state.CPUStyle} onChange={this.handleChange.bind(this, 'CPU')} value={this.state.CPU} bsSize="large" ref="inptCPU" placeholder="Enter Current CPU" />
+                <Input hasFeedback type="text" label="CPU" bsStyle={this.state.CPUStyle} onChange={this.handleChange.bind(this, 'CPU')} value={this.state.CPU} bsSize="large" placeholder="Enter Current CPU" />
               </Col>
             </Row>
             <Row className="show-grid">
               <Col>
-                <Input hasFeedback type="text" label="GPU" bsStyle={this.state.GPUStyle} onChange={this.handleChange.bind(this, 'GPU')} value={this.state.GPU} bsSize="large" ref="inptGPU" placeholder="Enter Current GPU" />
+                <Input hasFeedback type="text" label="GPU" bsStyle={this.state.GPUStyle} onChange={this.handleChange.bind(this, 'GPU')} value={this.state.GPU} bsSize="large" placeholder="Enter Current GPU" />
               </Col>
             </Row>
             <Row className="show-grid">
               <Col>
-                <Input hasFeedback type="text" label="RAM" bsStyle={this.state.RAMStyle} onChange={this.handleChange.bind(this, 'RAM')} value={this.state.RAM} bsSize="large" ref="inptRAM" placeholder="Enter Current RAM" />
+                <Input hasFeedback type="text" label="RAM" bsStyle={this.state.RAMStyle} onChange={this.handleChange.bind(this, 'RAM')} value={this.state.RAM} bsSize="large" placeholder="Enter Current RAM" />
               </Col>
             </Row>
+            <Row className="show-grid">
+              <Col>
+                <Well bsSize="small" className="text-center">
+                  Enter Benchmark Results
+                </Well>
+                <Input hasFeedback type="text" label="Average FPS" bsStyle={this.state.AvgFPSStyle} onChange={this.handleChange.bind(this, 'AvgFPS')} value={this.state.AvgFPS} bsSize="large" placeholder="Enter your avrage frames per second" />
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input hasFeedback type="text" label="Maximum FPS" bsStyle={this.state.MaxFPSStyle} onChange={this.handleChange.bind(this, 'MaxFPS')} value={this.state.MaxFPS} bsSize="large" placeholder="Enter your max frames per second" />
+              </Col>
+            </Row>
+            <Row className="show-grid">
+              <Col>
+                <Input hasFeedback type="text" label="Minimum FPS" bsStyle={this.state.MinFPSStyle} onChange={this.handleChange.bind(this, 'MinFPS')} value={this.state.MinFPS} bsSize="large" placeholder="Enter your min frames per second" />
+              </Col>
+            </Row>
+
           </form>
         </Grid>
       </Modal.Body>
@@ -83,17 +108,24 @@ module.exports = React.createClass({
     if (this.state.UsernameStyle == 'success' &&
         this.state.CPUStyle == 'success' &&
         this.state.GPUStyle == 'success' &&
-        this.state.RAMStyle == 'success') {
+        this.state.RAMStyle == 'success' &&
+        this.state.AvgFPSStyle == 'success' &&
+        this.state.MinFPSStyle == 'success' &&
+        this.state.MaxFPSStyle == 'success') {
 
       var submitJSON = {
         "Username": this.state.Username,
         "CPU": this.state.CPU,
         "GPU": this.state.GPU,
         "RAM": this.state.RAM,
+        "AvgFPS": this.state.AvgFPS,
+        "MaxFPS": this.state.MaxFPS,
+        "MinFPS": this.state.MinFPS,
         "GameId": this.props.id
       };
-      console.log(submitJSON);
-      //Actions.postBenchmarks(submitJSON);
+      alert(JSON.stringify(submitJSON, null, 4));
+      this.props.onHide();
+      Actions.postBenchmarks(submitJSON);
     } else {
       if (this.state.UsernameStyle !== 'success') {
         console.log("No Username");
@@ -103,6 +135,12 @@ module.exports = React.createClass({
         console.log("No GPU");
       } else if (this.state.RAMStyle !== 'success') {
         console.log("No RAM");
+      } else if (this.state.AvgFPSStyle !== 'success') {
+        console.log("No Avrage FPS");
+      } else if (this.state.MinFPSStyle !== 'success') {
+        console.log("No Maximum FPS");
+      } else if (this.state.MaxFPSStyle !== 'success') {
+        console.log("No Minimum FPS");
       }
     }
   },
@@ -136,15 +174,33 @@ module.exports = React.createClass({
         else if (length > 4) this.setState({RAMStyle: 'warning'});
         else this.setState({RAMStyle: 'default'});
         break;
+      case 'AvgFPSStyle':
+        if (length > 6) this.setState({AvgFPSStyle: 'success'});
+        else if (length > 4) this.setState({AvgFPSStyle: 'warning'});
+        else this.setState({AvgFPSStyle: 'default'});
+        break;
+      case 'MaxFPSStyle':
+        if (length > 6) this.setState({MaxFPSStyle: 'success'});
+        else if (length > 4) this.setState({MaxFPSStyle: 'warning'});
+        else this.setState({MaxFPSStyle: 'default'});
+        break;
+      case 'MinFPSStyle':
+        if (length > 6) this.setState({MinFPSStyle: 'success'});
+        else if (length > 4) this.setState({MinFPSStyle: 'warning'});
+        else this.setState({MinFPSStyle: 'default'});
+        break;
     }
     if (this.state.UsernameStyle == 'success' &&
         this.state.CPUStyle == 'success' &&
         this.state.GPUStyle == 'success' &&
-        this.state.RAMStyle == 'success') {
+        this.state.RAMStyle == 'success' &&
+        this.state.AvgFPSStyle == 'success' &&
+        this.state.MinFPSStyle == 'success' &&
+        this.state.MaxFPSStyle == 'success') {
 
       this.setState({SubmitBtnStyle: 'success'});
     }else {
-      this.setState({SubmitBtnStyle: 'defualt'});
+      this.setState({SubmitBtnStyle: 'default'});
     }
     return {style};
   }
