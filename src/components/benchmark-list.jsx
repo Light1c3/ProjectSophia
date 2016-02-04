@@ -25,7 +25,7 @@ module.exports = React.createClass({
     return {
       showModal: false,
       benches: [],
-      game: []
+      game: null
     }
   },
   componentWillMount: function() {
@@ -33,8 +33,12 @@ module.exports = React.createClass({
     Actions.getGameById(this.props.params.id);
   },
   render: function() {
+    var name = "";
+    if(this.state.game!=null){
+      name = this.state.game.Title
+    }
     return <div>
-      {console.log(this.state.game)}
+      {name}
       {this.renderBenches()}
       <div className="text-center">
         <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} id={this.props.params.id}/>
