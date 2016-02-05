@@ -8,6 +8,7 @@ var GamesStore = require('../stores/games-store');
 var Actions = require('../actions');
 
 var Modal = Bootstrap.Modal;
+var Popover= Bootstrap.Popover;
 var Button = Bootstrap.Button;
 var PageHeader = Bootstrap.PageHeader;
 
@@ -55,7 +56,6 @@ module.exports = React.createClass({
           </small>
         </div>
       </h2>
-
       {this.renderBenches()}
       <div>
         <span>
@@ -73,6 +73,18 @@ module.exports = React.createClass({
     </div>
   },
   renderBenches: function() {
+    var pos = (window.innerWidth)/2
+    pos = pos - 140
+    if (this.state.game != null) {
+      if (this.state.game.MarkCount == 0) {
+        return <div>
+          <br />
+            <h3> Their are no benchmarks for this game.</h3>
+            <h4>Click below to create the first!</h4>
+          <br />
+        </div>
+      }
+    }
     return <div>
       {this.state.benches.map((benchmark) =>
         <Benchmark Benches={benchmark} className="list-group-item" key={benchmark.Id} />
