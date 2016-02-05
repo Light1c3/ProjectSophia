@@ -63,7 +63,7 @@ module.exports = React.createClass({
                 <Well bsSize="small" className="text-center">
                   Enter Basic Computer Specs
                 </Well>
-                <Input hasFeedback type="text" label="CPU" bsStyle={this.state.CPUStyle} onChange={this.handleChange.bind(this, 'CPU')} value={this.state.CPU} bsSize="large" placeholder="Enter Current CPU" />
+                <Input hasFeedback type="text" label={this.detectedCores()} bsStyle={this.state.CPUStyle} onChange={this.handleChange.bind(this, 'CPU')} value={this.state.CPU} bsSize="large" placeholder="Enter Current CPU" />
               </Col>
             </Row>
             <Row className="show-grid">
@@ -104,6 +104,10 @@ module.exports = React.createClass({
       </Modal.Footer>
     </Modal>);
   },
+  detectedCores: function() {
+    var threads = navigator.hardwareConcurrency
+    return "CPU || " + threads + " threads detected"
+  },
   formSubmit: function() {
     if (this.state.UsernameStyle == 'success' &&
         this.state.CPUStyle == 'success' &&
@@ -128,19 +132,19 @@ module.exports = React.createClass({
       Actions.postBenchmarks(submitJSON);
     } else {
       if (this.state.UsernameStyle !== 'success') {
-        console.log("No Username");
+        alert("No Username Entered");
       } else if (this.state.CPUStyle !== 'success') {
-        console.log("No CPU");
+        alert("No CPU Entered");
       } else if (this.state.GPUStyle !== 'success') {
-        console.log("No GPU");
+        alert("No GPU Entered");
       } else if (this.state.RAMStyle !== 'success') {
-        console.log("No RAM");
+        alert("No RAM Entered");
       } else if (this.state.AvgFPSStyle !== 'success') {
-        console.log("No Avrage FPS");
+        alert("No Avrage FPS Entered");
       } else if (this.state.MinFPSStyle !== 'success') {
-        console.log("No Maximum FPS");
+        alert("No Maximum FPS Entered");
       } else if (this.state.MaxFPSStyle !== 'success') {
-        console.log("No Minimum FPS");
+        alert("No Minimum FPS Entered");
       }
     }
   },
@@ -155,38 +159,38 @@ module.exports = React.createClass({
     var length = event.target.value.length;
     switch (style) {
       case 'UsernameStyle':
-        if (length > 6) this.setState({UsernameStyle: 'success'});
-        else if (length > 4) this.setState({UsernameStyle: 'warning'});
+        if (length >= 6) this.setState({UsernameStyle: 'success'});
+        else if (length >= 4) this.setState({UsernameStyle: 'warning'});
         else this.setState({UsernameStyle: 'default'});
         break;
       case 'CPUStyle':
-        if (length > 6) this.setState({CPUStyle: 'success'});
-        else if (length > 4) this.setState({CPUStyle: 'warning'});
+        if (length >= 6) this.setState({CPUStyle: 'success'});
+        else if (length >= 4) this.setState({CPUStyle: 'warning'});
         else this.setState({CPUStyle: 'default'});
         break;
       case 'GPUStyle':
-        if (length > 6) this.setState({GPUStyle: 'success'});
-        else if (length > 4) this.setState({GPUStyle: 'warning'});
+        if (length >= 6) this.setState({GPUStyle: 'success'});
+        else if (length >= 4) this.setState({GPUStyle: 'warning'});
         else this.setState({GPUStyle: 'default'});
         break;
       case 'RAMStyle':
-        if (length > 6) this.setState({RAMStyle: 'success'});
-        else if (length > 4) this.setState({RAMStyle: 'warning'});
+        if (length >= 6) this.setState({RAMStyle: 'success'});
+        else if (length >= 4) this.setState({RAMStyle: 'warning'});
         else this.setState({RAMStyle: 'default'});
         break;
       case 'AvgFPSStyle':
-        if (length > 6) this.setState({AvgFPSStyle: 'success'});
-        else if (length > 4) this.setState({AvgFPSStyle: 'warning'});
+        if (length >= 2) this.setState({AvgFPSStyle: 'success'});
+        else if (length >= 1) this.setState({AvgFPSStyle: 'warning'});
         else this.setState({AvgFPSStyle: 'default'});
         break;
       case 'MaxFPSStyle':
-        if (length > 6) this.setState({MaxFPSStyle: 'success'});
-        else if (length > 4) this.setState({MaxFPSStyle: 'warning'});
+        if (length >= 2) this.setState({MaxFPSStyle: 'success'});
+        else if (length > 1) this.setState({MaxFPSStyle: 'warning'});
         else this.setState({MaxFPSStyle: 'default'});
         break;
       case 'MinFPSStyle':
-        if (length > 6) this.setState({MinFPSStyle: 'success'});
-        else if (length > 4) this.setState({MinFPSStyle: 'warning'});
+        if (length >= 2) this.setState({MinFPSStyle: 'success'});
+        else if (length >= 1) this.setState({MinFPSStyle: 'warning'});
         else this.setState({MinFPSStyle: 'default'});
         break;
     }

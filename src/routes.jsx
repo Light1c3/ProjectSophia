@@ -9,7 +9,7 @@ var Benchmarks = require('./components/benchmark-list');
 module.exports = (
   <Router>
     <Route path="/" component={Main}>
-      <Route path="games/:id" component={Benchmarks} />
+      <Route path="game/:id" component={Benchmarks} />
     </Route>
   </Router>
 )

@@ -13,11 +13,19 @@ module.exports = React.createClass({
     }
   },
   search() {
-    console.log(this.state.searchedItem);
     this.setState({searchedItem: ''});
-    location.reload()
-    console.log("New Page");
+    window.location.assign("#/game/" + this.getGameTitleFromId(this.state.searchedItem));
+    this.forceUpdate()
 
+  },
+  getGameTitleFromId: function(gameId) {
+    switch (gameId) {
+      case "Fallout 4": return "1";
+      case "League of Legends": return "2";
+      case "Battlefield 4": return "3";
+      case "Star Wars Battlefront": return "4";
+      case "The Witcher 3": return "7";
+    }
   },
   render: function() {
     return <div className="row panel panel-defualt">
@@ -28,11 +36,9 @@ module.exports = React.createClass({
         <div className="input-group searchBar">
           <Input type="text" value={this.state.searchedItem} className="standalone" onChange={this.handleChange} ref="searchInput" />
           <span className="input-group-btn">
-            <Link to={"games/" + this.state.searchedItem}>
               <Button onClick={this.search}>
                 Search
               </Button>
-            </Link>
           </span>
         </div>
     </div>

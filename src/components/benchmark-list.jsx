@@ -39,7 +39,8 @@ module.exports = React.createClass({
     var publisher = "";
     var releastDate = "";
 
-    if(this.state.game!=null){
+    if(this.state.game!=null)
+    {
       name = this.state.game.Title
       gameCover = this.state.game.ImageURL
       publisher = this.state.game.Publisher
