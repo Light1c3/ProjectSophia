@@ -15,6 +15,9 @@ module.exports = React.createClass({
   search() {
     console.log(this.state.searchedItem);
     this.setState({searchedItem: ''});
+    location.reload()
+    console.log("New Page");
+
   },
   render: function() {
     return <div className="row panel panel-defualt">
@@ -26,10 +29,10 @@ module.exports = React.createClass({
           <Input type="text" value={this.state.searchedItem} className="standalone" onChange={this.handleChange} ref="searchInput" />
           <span className="input-group-btn">
             <Link to={"games/" + this.state.searchedItem}>
-            <Button onClick={this.search}>
-              Search
-            </Button>
-          </Link>
+              <Button onClick={this.search}>
+                Search
+              </Button>
+            </Link>
           </span>
         </div>
     </div>

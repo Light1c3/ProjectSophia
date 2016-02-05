@@ -9,6 +9,7 @@ var Actions = require('../actions');
 
 var Modal = Bootstrap.Modal;
 var Button = Bootstrap.Button;
+var PageHeader = Bootstrap.PageHeader;
 
 module.exports = React.createClass({
   mixins: [
@@ -34,16 +35,34 @@ module.exports = React.createClass({
   },
   render: function() {
     var name = "";
+    var gameCover = "";
+    var publisher = "";
+    var releastDate = "";
+
     if(this.state.game!=null){
       name = this.state.game.Title
+      gameCover = this.state.game.ImageURL
+      publisher = this.state.game.Publisher
+      releastDate = this.state.game.Year
     }
-    return <div>
-      {name}
+    return <div className="text-center">
+      <h2 className="titleMark">
+        {name}
+        <div>
+          <small>
+            <b>Publisher: </b>{publisher}   <b>Release Year: </b>{releastDate}
+          </small>
+        </div>
+      </h2>
+
       {this.renderBenches()}
-      <div className="text-center">
-        <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} id={this.props.params.id}/>
+      <div>
+        <span>
+          <NewBench handleSub={this.handleSubmit} show={this.state.showModal} onHide={this.close} id={this.props.params.id}/>
+        </span>
       </div>
       <Button
+        className="newBenchmark"
         bsSize="large"
         onClick={this.open}
       >
